@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "binary-split": "^1.0.0",
+    "geojson-stream": "0.0.1",
     "minimist": "^1.2.0",
+    "multilove": "^1.0.0",
     "through2": "^2.0.0",
     "turf": "^2.0.2"
   }
