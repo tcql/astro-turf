@@ -12,9 +12,13 @@ argv = xtend({
   logInterval: 50,
 }, argv);
 
+if (!argv.method) {
+  console.error("--method is required")
+  process.exit();
+}
+
 if (!argv.args) argv.args = '[$]';
 if (argv.args[0] !== '[') argv.args = '[' + argv.args + ']';
-
 var donect = 0;
 
 process.stdin
