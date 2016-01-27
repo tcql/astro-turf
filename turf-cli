@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+var split = require('binary-split');
+var through2 = require('through2');
+var argv = require('minimist')(process.argv.slice(2));
+var turf = require('turf');
+
+if (!argv.parameters) argv.parameters="$";
+
+process.stdin.pipe(split())
+  .pipe(through2.obj(function (chunk, enc, done) {
+    var json = JSON.parse(chunk.toString());
+    var fn = turf[argv.method];
+    var fnargs = argv.parameters.split(',');
+    fnargs.forEach(function (arg, idx) {
+      if (arg == "$") fnargs[idx] = json;
+    });
+    var result = fn.apply(fn, fnargs);
+    if (typeof result == 'object') result = JSON.stringify(result);
+    done(null, result + '\n'); 
+  }))
+  .pipe(process.stdout);

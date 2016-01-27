@@ -1,0 +1,17 @@
+{
+  "name": "turf-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "turf-cli""
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Channell",
+  "license": "ISC",
+  "dependencies": {
+    "binary-split": "^1.0.0",
+    "minimist": "^1.2.0",
+    "through2": "^2.0.0",
+    "turf": "^2.0.2"
+  }
+}
