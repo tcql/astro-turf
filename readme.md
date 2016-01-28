@@ -1,4 +1,4 @@
-## turf-cli
+## astro-turf
 
 allows you to run turf functions on streaming **line delimited json**
 
@@ -7,7 +7,7 @@ allows you to run turf functions on streaming **line delimited json**
 use `--method`
 
 ```sh
-turf-cli --method=bboxPolygon
+astro --method=bboxPolygon
 ```
 
 accepted method names are any turf module
@@ -17,7 +17,7 @@ accepted method names are any turf module
 If you want to call a method that requires other parameters, for example, buffer,
 use `--args`. `$` is a standin for the streaming line input. Note that the value of `--args` must be quoted if it contains strings or objects.
 
-`cat polygons.json | turf-cli --method=buffer --args='$,10,"miles"'`
+`cat polygons.json | astro --method=buffer --args='$,10,"miles"'`
 
 
 ### splitting feature collections
@@ -26,8 +26,8 @@ If the input contains feature collections, they can be split so that each featur
 
 ```sh
 echo '[-122.8,37.2,-121.7,37.9]' | \
-  turf-cli --method=random --args='"point",1000,{"bbox":$}' | \
-  turf-cli --splitCollections --method=buffer --args='$,100,"miles"'
+  astro --method=random --args='"point",1000,{"bbox":$}' | \
+  astro --splitCollections --method=buffer --args='$,100,"miles"'
 ```
 
 ### parallel processing (experimental)
