@@ -4,6 +4,12 @@ module.exports = function(data, worker) {
   var argv = worker.userOptions.argv;
   var args = argv.args;
   var fn = turf[argv.method];
+
+  // allow a noop print method
+  if (argv.method === 'print') {
+    fn = function (geom) { return geom; };
+  }
+
   var json = JSON.parse(new Buffer(data).toString());
 
   var queue = [json];
