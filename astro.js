@@ -12,8 +12,8 @@ argv = xtend({
   logInterval: 1000,
 }, argv);
 
-if (!argv.method) {
-  console.error("--method is required");
+if (!argv.method && !argv.map) {
+  console.error("one of --method or --map is required");
   process.exit();
 }
 

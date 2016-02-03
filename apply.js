@@ -1,9 +1,15 @@
 var turf = require('turf');
+var path = require('path');
 
 module.exports = function(data, worker) {
   var argv = worker.userOptions.argv;
   var args = argv.args;
-  var fn = turf[argv.method];
+
+  if (argv.method) {
+    var fn = turf[argv.method];
+  } else if (argv.map) {
+    var fn = require(path.resolve(argv.map));
+  }
 
   // allow a noop print method
   if (argv.method === 'print') {
