@@ -19,9 +19,20 @@ if (!argv.method && !argv.map) {
 
 if (!argv.args) argv.args = '[$]';
 if (argv.args[0] !== '[') argv.args = '[' + argv.args + ']';
-var donect = 0;
+argv.args = JSON.parse(argv.args
+  .replace(/\$/g, '"$"')
+  .replace(/'(\w+)'/g, '"$1"')
+  .replace(/,(\s?)([a-zA-Z]+)/g, ',"$2"')
+);
 
-report(0);
+// track where we need to insert geometries
+argv.placeholders = [];
+for (var i = 0; i < argv.args.length; i++) {
+  if (argv.args[i] === '$') argv.placeholders.push(i);
+}
+
+var donect = 0;
+report(donect);
 
 process.stdin
   .pipe(split())
